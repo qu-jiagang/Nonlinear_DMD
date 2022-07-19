@@ -1,2 +1,4 @@
 dataset
+.idea
+.DS_Store
 *.dat
