@@ -25,8 +25,14 @@ Y = D[:,1:]
 
 Phi,Psi = dmd(X,Y,3)
 
+plt.figure()
+for i in range(3):
+    plt.plot(np.real(Phi[i]))
+    # plt.plot(np.imag(Phi[i]))
+
+plt.figure()
 for i in range(3):
     plt.subplot(311+i)
-    plt.plot(np.real(Psi)[i])
-    plt.plot(np.imag(Psi)[i])
+    plt.plot(np.real(Psi[i]))
+    plt.plot(np.imag(Psi[i]))
 plt.show()

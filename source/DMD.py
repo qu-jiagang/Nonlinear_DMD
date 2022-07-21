@@ -18,6 +18,7 @@ def snapshot_dmd(snapshots, snapshots_prime, rank=None, dask=False):
     Y = snapshots_prime.reshape([t, m * n]).T
 
     modes, coefs = dmd(X,Y,rank,dask)
+    modes = modes.reshape([-1,m,n])
 
     return modes, coefs
 
@@ -46,6 +47,10 @@ def dmd(X, Y, rank=None, dask=False):
     A_tilde = dot(dot(dot(U.conj().T, Y), V), inv(S))
     mu, W = np.linalg.eig(A_tilde)
 
+    idx = mu.argsort()[::-1]
+    mu = mu[idx]
+    W = W[:, idx]
+
     # build DMD modes
     Phi = dot(dot(dot(Y, V), inv(S)), W)
 
@@ -55,4 +60,7 @@ def dmd(X, Y, rank=None, dask=False):
     for i, _t in enumerate(t):
         Psi[:, i] = multiply(power(mu, _t / dt), b)
 
-    return Phi, Psi
+    modes = Phi.T
+    coefs = Psi
+
+    return modes, coefs

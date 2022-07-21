@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="934437a1-c3df-468e-87b5-90a5d9c4c4db" name="变更" comment="" />
+    <list default="true" id="934437a1-c3df-468e-87b5-90a5d9c4c4db" name="变更" comment="">
+      <change afterPath="$PROJECT_DIR$/periodic_cylinder/NeuralNetwork.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/source/NDMDNetwork.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DMD_TestCase.py" beforeDir="false" afterPath="$PROJECT_DIR$/DMD_TestCase.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/periodic_cylinder/DMDTestCase.py" beforeDir="false" afterPath="$PROJECT_DIR$/periodic_cylinder/DMDTestCase.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/DMD.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/DMD.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,19 +28,21 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2BrAeXAsKSUL0nKO42Tq5vIObH5" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/qujiagang/PycharmProjects/Nonlinear_DMD",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/qujiagang/PycharmProjects/Nonlinear_DMD&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -44,7 +53,7 @@
       <recent name="$PROJECT_DIR$/source" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.POD">
+  <component name="RunManager" selected="Python.DMD_TestCase">
     <configuration name="DMDTestCase" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Nonlinear_DMD" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -116,7 +125,7 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/periodic_cylinder" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -152,11 +161,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.POD" />
-        <item itemvalue="Python.DMDTestCase" />
-        <item itemvalue="Python.PODTestCase_periodic_cylinder" />
-        <item itemvalue="Python.Spiral_waves" />
         <item itemvalue="Python.DMD_TestCase" />
+        <item itemvalue="Python.DMDTestCase" />
+        <item itemvalue="Python.PODTestCase" />
+        <item itemvalue="Python.POD" />
+        <item itemvalue="Python.Spiral_waves" />
       </list>
     </recent_temporary>
   </component>
