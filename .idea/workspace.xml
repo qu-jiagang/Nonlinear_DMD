@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="934437a1-c3df-468e-87b5-90a5d9c4c4db" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/periodic_cylinder/NeuralNetwork.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/source/NDMDNetwork.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DMD_TestCase.py" beforeDir="false" afterPath="$PROJECT_DIR$/DMD_TestCase.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/periodic_cylinder/DMDTestCase.py" beforeDir="false" afterPath="$PROJECT_DIR$/periodic_cylinder/DMDTestCase.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/DMD.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/DMD.py" afterDir="false" />
-    </list>
+    <list default="true" id="934437a1-c3df-468e-87b5-90a5d9c4c4db" name="变更" comment="0721" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -178,6 +171,14 @@
       <option name="presentableId" value="Default" />
       <updated>1657653926121</updated>
     </task>
+    <task id="LOCAL-00001" summary="0721">
+      <created>1658378680184</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1658378680184</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -190,5 +191,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="0721" />
+    <option name="LAST_COMMIT_MESSAGE" value="0721" />
   </component>
 </project>
