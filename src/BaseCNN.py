@@ -1,5 +1,5 @@
 import torch.nn as nn
-from config import *
+from src.config import *
 
 
 class BaseCNN(nn.Module):

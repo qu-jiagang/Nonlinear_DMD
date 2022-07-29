@@ -1,4 +1,3 @@
-from typing import Dict, Tuple, Union
 import numpy as np
 
 
@@ -59,10 +58,10 @@ class ConfigNDMD:
                  encoder_MLP: ConfigBase = None,
                  decoder: ConfigBase = ConfigBase([512,512,512,256,128,64,1]),
                  decoder_MLP: ConfigBase = None):
-        datasize_pooled = [x / (2 ** (len(encoder.structure) - 1)) for x in input_datasize]
-        encoder_output_dim = encoder.output_dim * int(np.prod(datasize_pooled))
-        datasize_sampled = [x / (2 ** (len(decoder.structure) - 1)) for x in input_datasize]
-        decoder_input_dim = encoder.output_dim * int(np.prod(datasize_sampled))
+        self.datasize_pooled = [x / (2 ** (len(encoder.structure) - 1)) for x in input_datasize]
+        encoder_output_dim = encoder.output_dim * int(np.prod(self.datasize_pooled))
+        self.datasize_sampled = [x / (2 ** (len(decoder.structure) - 1)) for x in input_datasize]
+        decoder_input_dim = encoder.output_dim * int(np.prod(self.datasize_sampled))
         if encoder_MLP is None:
             encoder_MLP = ConfigBase([encoder_output_dim, 128, latent_dim])
         if decoder_MLP is None:

@@ -1,8 +1,7 @@
 import torch.nn as nn
-import numpy as np
-from BaseMLP import BaseMLP
-from BaseCNN import BaseCNN
-from config import *
+from src.BaseMLP import BaseMLP
+from src.BaseCNN import BaseCNN
+from src.config import *
 
 
 class BaseCAE(nn.Module):

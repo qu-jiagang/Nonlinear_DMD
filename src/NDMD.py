@@ -1,9 +1,6 @@
-import numpy as np
-import torch.nn as nn
-from AEBaseCNN import *
-from BaseMLP import BaseMLP
-from BaseCNN import BaseCNN
-from config import *
+from src.AEBaseCNN import *
+from src.BaseMLP import BaseMLP
+from src.config import *
 import torch
 
 
@@ -18,6 +15,7 @@ class NDMD(nn.Module):
         decoder_MLP: [Latent_dim -> decoder_input_dim]
         decoder:     [128 -> 64 -> 1]
         '''
+        self.args = args
         self.latent_dim = args.latent_dim
 
         self.encoder = MaxPoolCNN(args.encoder)
@@ -35,10 +33,11 @@ class NDMD(nn.Module):
 
         tempz = []
         for i in range(self.latent_dim):
-            tempz.append(self.decoder_mlps[i](x[:,i:i+1]))
+            tempz.append(self.decoder_mlps[i](z1[:,i:i+1]))
         tempx = []
         for i in range(self.latent_dim):
-            tempx.append(self.decoder(tempz[i]))
+            temp = tempz[i].reshape([channels, -1, self.args.datasize_pooled[0], self.args.datasize_pooled[1]])
+            tempx.append(self.decoder(temp))
         x_reconst = torch.zeros_like(x)
         for i in range(self.latent_dim):
             x_reconst += tempx[i]
@@ -49,7 +48,8 @@ class NDMD(nn.Module):
             tempz_shift.append(self.decoder_mlps[i](z2[:,i:i+1]))
         tempx_shift = []
         for i in range(self.latent_dim):
-            tempx_shift.append(self.decoder(tempz_shift[i]))
+            temp = tempz_shift[i].reshape([channels, -1, self.args.datasize_pooled[0], self.args.datasize_pooled[1]])
+            tempx_shift.append(self.decoder(temp))
         x_reconst_shift = torch.zeros_like(x)
         for i in range(self.latent_dim):
             x_reconst_shift += tempx_shift[i]

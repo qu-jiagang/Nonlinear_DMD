@@ -8,6 +8,7 @@ import torch.nn.functional as F
 from torch.autograd import Variable
 from torch.utils.data import DataLoader, TensorDataset
 
+
 # parameters for Net
 Nx, Ny = 192, 384
 args = ConfigNDMD(

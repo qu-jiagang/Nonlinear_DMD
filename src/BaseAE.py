@@ -1,7 +1,6 @@
 import torch.nn as nn
-import numpy as np
-from BaseMLP import BaseMLP
-from config import *
+from src.BaseMLP import BaseMLP
+from src.config import *
 
 
 class BaseAE(nn.Module):
