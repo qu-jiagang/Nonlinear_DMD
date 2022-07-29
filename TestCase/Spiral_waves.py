@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from numpy import sqrt, cos, tanh, exp, angle
-from source.POD import snapshot_pod
+from src.POD import snapshot_pod
 
 
 # spiral waves

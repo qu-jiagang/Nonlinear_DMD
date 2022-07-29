@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from source.DMD import snapshot_dmd
-from source.POD import pod
+from src.DMD import snapshot_dmd
+from src.POD import pod
 
 
 # Data-Driven Science and Engineering Machine Learning Dynamical Systems and Control
