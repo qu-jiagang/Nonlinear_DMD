@@ -2,23 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="934437a1-c3df-468e-87b5-90a5d9c4c4db" name="变更" comment="0721">
-      <change afterPath="$PROJECT_DIR$/src/AEBaseCNN.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/BaseCAE.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/BaseCNN.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/BaseMLP.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/NDMD.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DMD_TestCase.py" beforeDir="false" afterPath="$PROJECT_DIR$/TestCase/DMD_TestCase.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Spiral_waves.py" beforeDir="false" afterPath="$PROJECT_DIR$/TestCase/Spiral_waves.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wave_propagation.py" beforeDir="false" afterPath="$PROJECT_DIR$/TestCase/Wave_propagation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/periodic_cylinder/DMDTestCase.py" beforeDir="false" afterPath="$PROJECT_DIR$/periodic_cylinder/DMDTestCase.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/periodic_cylinder/NeuralNetwork.py" beforeDir="false" afterPath="$PROJECT_DIR$/periodic_cylinder/NDMD.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/periodic_cylinder/PODTestCase.py" beforeDir="false" afterPath="$PROJECT_DIR$/periodic_cylinder/PODTestCase.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/DMD.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/DMD.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/NDMDNetwork.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/BaseAE.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/POD.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/POD.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/periodic_cylinder/NDMD.py" beforeDir="false" afterPath="$PROJECT_DIR$/periodic_cylinder/NDMD.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NDMD.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/NDMD.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

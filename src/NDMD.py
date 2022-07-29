@@ -28,26 +28,33 @@ class NDMD(nn.Module):
             self.decoder_mlps.append(BaseMLP(args.decoder_MLP))
         self.decoder = UpsampleCNN(args.decoder)
 
-    def forward(self, x):
+    def forward(self, x, x_shift):
         channels = x.size(0)
-        x = self.encoder(x)
-        x = x.reshape([channels, -1])
-        x = self.encoder_mlp(x)
-        x = self.latent(x)
+        out = self.encoder(x)
+        z1 = self.encoder_mlp(out.reshape([channels, -1]))
+
         tempz = []
         for i in range(self.latent_dim):
-            z = x[:,i:i+1]
-            tempz.append(self.decoder_mlps[i](z))
+            tempz.append(self.decoder_mlps[i](x[:,i:i+1]))
         tempx = []
         for i in range(self.latent_dim):
             tempx.append(self.decoder(tempz[i]))
         x_reconst = torch.zeros_like(x)
         for i in range(self.latent_dim):
             x_reconst += tempx[i]
-        return x_reconst
 
+        z2 = self.latent(z1)
+        tempz_shift = []
+        for i in range(self.latent_dim):
+            tempz_shift.append(self.decoder_mlps[i](z2[:,i:i+1]))
+        tempx_shift = []
+        for i in range(self.latent_dim):
+            tempx_shift.append(self.decoder(tempz_shift[i]))
+        x_reconst_shift = torch.zeros_like(x)
+        for i in range(self.latent_dim):
+            x_reconst_shift += tempx_shift[i]
 
-args = ConfigNDMD(input_datasize=[192,384])
-Net = NDMD(args)
-print(Net)
+        z2_from_shift = self.encoder_mlp(self.encoder(x_shift).reshape([channels,-1]))
+
+        return x_reconst, x_reconst_shift, z2, z2_from_shift
 
