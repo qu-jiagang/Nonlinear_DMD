@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="934437a1-c3df-468e-87b5-90a5d9c4c4db" name="变更" comment="0721">
+    <list default="true" id="934437a1-c3df-468e-87b5-90a5d9c4c4db" name="变更" comment="fix bugs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/periodic_cylinder/NDMD.py" beforeDir="false" afterPath="$PROJECT_DIR$/periodic_cylinder/NDMD.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AEBaseCNN.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/AEBaseCNN.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BaseAE.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/BaseAE.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BaseCAE.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/BaseCAE.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BaseCNN.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/BaseCNN.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BaseMLP.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/BaseMLP.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NDMD.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/NDMD.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,14 +30,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/qujiagang/PycharmProjects/Nonlinear_DMD&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/Users/qujiagang/PycharmProjects/Nonlinear_DMD",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -189,7 +181,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658378680184</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fix bugs">
+      <created>1659193009639</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1659193009639</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -205,6 +204,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="0721" />
-    <option name="LAST_COMMIT_MESSAGE" value="0721" />
+    <MESSAGE value="fix bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bugs" />
   </component>
 </project>
