@@ -14,15 +14,16 @@ Nx, Ny = 192, 384
 args = ConfigNDMD(
     input_datasize=[Nx, Ny],
     latent_dim=2,
-    encoder=ConfigBase([1, 64, 128, 256, 512, 512, 512]),
-    encoder_MLP=None,
-    decoder=ConfigBase([512, 512, 512, 256, 128, 64, 1]),
-    decoder_MLP=None
+    encoder=[1, 64, 128, 256, 512, 512, 512],
+    encoder_mlp=[2048],
+    latent=[2048],
+    decoder=[512, 512, 512, 256, 128, 64, 1],
+    decoder_mlp=[2048],
 )
 
 # construct Net
 net = NDMD(args).cuda()
-input_data = optimizer = optim.Adam(net.parameters(), lr=0.001)
+input_data = optimizer = optim.Adam(net.parameters(), lr=0.0005)
 
 
 def loss_func(recon_x_1, x_1, recon_x_2, x_2, z2, z2_from_shift):
@@ -56,6 +57,7 @@ while epoch < 2000:
     _BCE, _KLD = 0, 0
     _loss, _loss1, _loss2 = 0, 0, 0
     epoch += 1
+    i = 0
     for i, data_cut in enumerate(train_loader):
         input_data = Variable(data_cut[0]).cuda()
         output_data = Variable(data_cut[1]).cuda()

@@ -28,7 +28,3 @@ class BaseCAE(nn.Module):
         x = x.reshape([channels, self.decoder.input_dim, self.args.datasize_pooled[0],self.args.datasize_pooled[1]])
         x = self.decoder(x)
         return x
-
-args = ConfigBaseCAE([128,128])
-net = BaseCAE(args)
-print(net)

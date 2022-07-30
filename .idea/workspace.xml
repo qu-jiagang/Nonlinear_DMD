@@ -4,6 +4,9 @@
     <list default="true" id="934437a1-c3df-468e-87b5-90a5d9c4c4db" name="变更" comment="0721">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/periodic_cylinder/NDMD.py" beforeDir="false" afterPath="$PROJECT_DIR$/periodic_cylinder/NDMD.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AEBaseCNN.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/AEBaseCNN.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BaseAE.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/BaseAE.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BaseCAE.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/BaseCAE.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BaseCNN.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/BaseCNN.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BaseMLP.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/BaseMLP.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/NDMD.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/NDMD.py" afterDir="false" />
@@ -54,7 +57,7 @@
       <recent name="$PROJECT_DIR$/source" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.NDMD (1)">
+  <component name="RunManager" selected="Python.NDMD">
     <configuration name="AEBaseCNN" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Nonlinear_DMD" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -162,9 +165,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.NDMD" />
         <item itemvalue="Python.NDMD (1)" />
         <item itemvalue="Python.AEBaseCNN" />
-        <item itemvalue="Python.NDMD" />
         <item itemvalue="Python.BaseCAE" />
         <item itemvalue="Python.BaseAE" />
       </list>

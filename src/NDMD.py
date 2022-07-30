@@ -8,12 +8,13 @@ class NDMD(nn.Module):
     def __init__(self, args: ConfigNDMD):
         super(NDMD, self).__init__()
         '''
-        args: ConfigNDMD
-        encoder:     [1 -> 64 -> 128]
-        encoder_MLP: [encoder_output_dim -> Latent_dim]
-        latent:      [Latent_dim -> 128 -> Latent_dim]
-        decoder_MLP: [Latent_dim -> decoder_input_dim]
-        decoder:     [128 -> 64 -> 1]
+        args: ConfigNDMD [default]
+        input_datasize:  [height, width]
+        encoder (CNN):   [1 -> 64 -> 128 -> 256 -> 512 -> 512 -> 512]
+        encoder_MLP:     [encoder_output_dim -> 2048 -> Latent_dim]
+        latent:          [Latent_dim -> 2048 -> Latent_dim]
+        decoder_MLP:     [Latent_dim -> 2048 -> decoder_input_dim]
+        decoder (CNN):   [512 -> 512 -> 512 -> 256 -> 128 -> 64 -> 1]
         '''
         self.args = args
         self.latent_dim = args.latent_dim

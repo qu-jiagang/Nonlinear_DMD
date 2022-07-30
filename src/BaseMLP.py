@@ -28,6 +28,7 @@ class BaseMLP(nn.Module):
         self.MLP_Layers = MLP_Layers
 
     def forward(self, x):
-        x = self.MLP_Layers(x)
+        for layer in self.MLP_Layers:
+            x = layer(x)
         return x
 

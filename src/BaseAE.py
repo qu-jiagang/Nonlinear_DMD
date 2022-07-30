@@ -18,8 +18,3 @@ class BaseAE(nn.Module):
         x = self.latent(x)
         x = self.decoder(x)
         return x
-
-
-args = ConfigBaseAE()
-net = BaseAE(args)
-print(net)
