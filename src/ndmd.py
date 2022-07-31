@@ -2,19 +2,20 @@ from src.ae_base_cnn import *
 from src.base_mlp import BaseMLP
 from src.config import *
 import torch
+import torch.nn.functional as F
 
 
 class NDMD(nn.Module):
     def __init__(self, args: ConfigNDMD):
         super(NDMD, self).__init__()
         '''
-        args: ConfigNDMD [default]
-        input_datasize:  [height, width]
-        encoder (CNN):   [1 -> 64 -> 128 -> 256 -> 512 -> 512 -> 512]
-        encoder_MLP:     [encoder_output_dim -> 2048 -> Latent_dim]
-        latent:          [Latent_dim -> 2048 -> Latent_dim]
-        decoder_MLP:     [Latent_dim -> 2048 -> decoder_input_dim]
-        decoder (CNN):   [512 -> 512 -> 512 -> 256 -> 128 -> 64 -> 1]
+        args: ConfigNDMD     [default]
+        input_datasize:      [height, width]
+        encoder (CNN):       [1 -> 64 -> 128 -> 256 -> 512 -> 512 -> 512]
+        encoder_MLP:         [encoder_output_dim -> 2048 -> Latent_dim]
+        latent:              [Latent_dim -> 2048 -> Latent_dim]
+        decoder_MLP (multi): [1 -> 2048 -> decoder_input_dim]
+        decoder (CNN):       [512 -> 512 -> 512 -> 256 -> 128 -> 64 -> 1]
         '''
         self.args = args
         self.latent_dim = args.latent_dim
@@ -59,3 +60,11 @@ class NDMD(nn.Module):
 
         return x_reconst, x_reconst_shift, z2, z2_from_shift
 
+    def loss_func(self, x_reconst, x, x_reconst_shift, x_shift, z2, z2_from_shift):
+        loss1 = F.mse_loss(x_reconst, x)
+        loss2 = F.mse_loss(x_reconst_shift, x_shift)
+        loss3 = F.mse_loss(z2, z2_from_shift)
+        sum_loss = loss1 + loss2 + loss3
+        reconst_loss = loss1 + loss2
+        represent_loss = loss3
+        return sum_loss, reconst_loss, represent_loss

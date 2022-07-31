@@ -4,7 +4,6 @@ import numpy as np
 from src.ndmd import NDMD
 from src.config import *
 import torch.optim as optim
-import torch.nn.functional as F
 from torch.autograd import Variable
 from torch.utils.data import DataLoader, TensorDataset
 
@@ -24,14 +23,6 @@ args = ConfigNDMD(
 # construct Net
 net = NDMD(args).cuda()
 input_data = optimizer = optim.Adam(net.parameters(), lr=0.0005)
-
-
-def loss_func(recon_x_1, x_1, recon_x_2, x_2, z2, z2_from_shift):
-    loss1 = F.mse_loss(recon_x_1, x_1)
-    loss2 = F.mse_loss(recon_x_2, x_2)
-    loss3 = F.mse_loss(z2_from_shift, z2)
-    return loss1 + loss2 + loss3, loss1 + loss2, loss3
-
 
 # dataset
 data = np.fromfile('../dataset/periodic.dat').reshape([1000, 1, Nx, Ny])
@@ -64,7 +55,7 @@ while epoch < 2000:
 
         optimizer.zero_grad()
         x_reconst_1, x_reconst_2, z2, z2_from_shift = net(input_data, output_data)
-        loss, loss1, loss2 = loss_func(x_reconst_1, input_data, x_reconst_2, output_data, z2, z2_from_shift)
+        loss, loss1, loss2 = net.loss_func(x_reconst_1, input_data, x_reconst_2, output_data, z2, z2_from_shift)
         loss.backward()
         nn.utils.clip_grad_norm_(net.parameters(), 1)
         optimizer.step()
