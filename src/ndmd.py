@@ -1,5 +1,5 @@
-from src.AEBaseCNN import *
-from src.BaseMLP import BaseMLP
+from src.ae_base_cnn import *
+from src.base_mlp import BaseMLP
 from src.config import *
 import torch
 

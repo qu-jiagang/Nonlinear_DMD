@@ -1,6 +1,6 @@
 import numpy as np
 from numpy import pi,multiply,power,exp,cosh,tanh
-from src.DMD import dmd
+from src.dmd import dmd
 import matplotlib.pyplot as plt
 
 

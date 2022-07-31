@@ -15,39 +15,49 @@ class ConfigBase:
 
 
 class ConfigBaseAE:
-    def __init__(self, encoder: ConfigBase = None, decoder: ConfigBase = None):
+    def __init__(self,
+                 encoder: list = None,
+                 latent: list = None,
+                 decoder: list = None):
         if encoder is None:
-            encoder = ConfigBase()
+            self.encoder = ConfigBase()
         if decoder is None:
-            decoder = ConfigBase()
-        self.encoder = encoder
-        self.decoder = decoder
+            self.decoder = ConfigBase()
+        if latent is None:
+            self.latent = ConfigBase([self.encoder.output_dim, 128, self.decoder.input_dim])
 
 
-class ConfigBaseCAE(ConfigBaseAE):
+class ConfigBaseCAE:
     def __init__(self,
                  input_datasize: list,
                  latent_dim: int = 2,
-                 encoder: ConfigBase = None,
-                 encoder_MLP: ConfigBase = None,
-                 decoder: ConfigBase = None,
-                 decoder_MLP: ConfigBase = None):
-        super(ConfigBaseAE, self).__init__(encoder, decoder)
+                 encoder: list = None,
+                 encoder_mlp: list = None,
+                 decoder: list = None,
+                 decoder_mlp: list = None):
         if encoder is None:
-            encoder = ConfigBase()
+            encoder = [1,32,64,32,1]
         if decoder is None:
-            decoder = ConfigBase()
-        datasize_pooled = [int(x / (2 ** (len(encoder.structure) - 1))) for x in input_datasize]
-        if encoder_MLP is None:
-            input_dim = encoder.output_dim * int(np.prod(datasize_pooled))
-            encoder_MLP = ConfigBase([input_dim, 128, latent_dim])
-        if decoder_MLP is None:
-            output_dim = encoder.output_dim * int(np.prod(datasize_pooled))
-            decoder_MLP = ConfigBase([latent_dim, 128, output_dim])
-        self.encoder_MLP = encoder_MLP
-        self.decoder_MLP = decoder_MLP
+            decoder = [1,32,64,32,1]
+        self.datasize_pooled = [int(x / (2 ** (len(encoder) - 1))) for x in input_datasize]
+        encoder_output_dim = encoder[-1] * int(np.prod(self.datasize_pooled))
+        self.datasize_sampled = [int(x / (2 ** (len(decoder) - 1))) for x in input_datasize]
+        decoder_input_dim = decoder[0] * int(np.prod(self.datasize_sampled))
+        if encoder_mlp is None:
+            encoder_mlp = [encoder_output_dim, 2048, latent_dim]
+        else:
+            encoder_mlp = [encoder_output_dim] + encoder_mlp + [latent_dim]
+        if decoder_mlp is None:
+            decoder_mlp = [latent_dim, 2048, decoder_input_dim]
+        else:
+            decoder_mlp = [latent_dim] + decoder_mlp + [decoder_input_dim]
+
+        self.encoder = ConfigBase(encoder)
+        self.encoder_MLP = ConfigBase(encoder_mlp)
+        self.decoder_MLP = ConfigBase(decoder_mlp)
+        self.decoder = ConfigBase(decoder)
+
         self.latent_dim = latent_dim
-        self.datasize_pooled = datasize_pooled
 
 
 class ConfigNDMD:

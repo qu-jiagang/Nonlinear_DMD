@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import numpy as np
-from src.NDMD import NDMD
+from src.ndmd import NDMD
 from src.config import *
 import torch.optim as optim
 import torch.nn.functional as F

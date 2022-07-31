@@ -1,6 +1,6 @@
 import torch.nn as nn
-from src.BaseMLP import BaseMLP
-from src.BaseCNN import BaseCNN
+from src.base_mlp import BaseMLP
+from src.base_cnn import BaseCNN
 from src.config import *
 
 

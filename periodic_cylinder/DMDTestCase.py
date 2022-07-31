@@ -1,5 +1,5 @@
 import numpy as np
-from src.DMD import snapshot_dmd
+from src.dmd import snapshot_dmd
 import matplotlib.pyplot as plt
 
 

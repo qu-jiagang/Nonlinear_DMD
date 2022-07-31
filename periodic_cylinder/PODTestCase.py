@@ -1,5 +1,5 @@
 import numpy as np
-from src.POD import snapshot_pod
+from src.pod import snapshot_pod
 import matplotlib.pyplot as plt
 
 
