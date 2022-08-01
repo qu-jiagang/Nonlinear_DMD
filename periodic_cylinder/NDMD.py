@@ -13,11 +13,12 @@ Nx, Ny = 192, 384
 args = ConfigNDMD(
     input_datasize=[Nx, Ny],
     latent_dim=2,
-    encoder=[1, 64, 128, 256, 512, 512, 512],
+    encoder=[1, 8, 16, 32, 64, 64, 64],
     encoder_mlp=[2048],
     latent=[2048],
     decoder=[512, 512, 512, 256, 128, 64, 1],
     decoder_mlp=[2048],
+    batch_normalization=True
 )
 
 # construct Net

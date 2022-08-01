@@ -6,12 +6,13 @@ class ConfigBase:
     # structure: list
     # e.g. config_base([1,128,1])
     # refer to a multi-layer neural network: 1->128->1
-    def __init__(self, structure: list = None):
+    def __init__(self, structure: list = None, batch_normalization=False):
         if structure is None:
             structure = [1, 128, 128, 128, 1]
         self.structure = structure
         self.input_dim = structure[0]
         self.output_dim = structure[-1]
+        self.batch_normalization = batch_normalization
 
 
 class ConfigBaseAE:
@@ -36,9 +37,9 @@ class ConfigBaseCAE:
                  decoder: list = None,
                  decoder_mlp: list = None):
         if encoder is None:
-            encoder = [1,32,64,32,1]
+            encoder = [1, 32, 64, 32, 1]
         if decoder is None:
-            decoder = [1,32,64,32,1]
+            decoder = [1, 32, 64, 32, 1]
         self.datasize_pooled = [int(x / (2 ** (len(encoder) - 1))) for x in input_datasize]
         encoder_output_dim = encoder[-1] * int(np.prod(self.datasize_pooled))
         self.datasize_sampled = [int(x / (2 ** (len(decoder) - 1))) for x in input_datasize]
@@ -68,7 +69,8 @@ class ConfigNDMD:
                  encoder_mlp: list = None,
                  latent: list = None,
                  decoder: list = None,
-                 decoder_mlp: list = None):
+                 decoder_mlp: list = None,
+                 batch_normalization=False):
         if encoder is None:
             encoder = [1, 64, 128, 256, 512, 512, 512]
         if decoder is None:
@@ -90,10 +92,10 @@ class ConfigNDMD:
         else:
             latent = [latent_dim] + latent + [latent_dim]
 
-        self.encoder = ConfigBase(encoder)
-        self.encoder_MLP = ConfigBase(encoder_mlp)
-        self.latent = ConfigBase(latent)
-        self.decoder_MLP = ConfigBase(decoder_mlp)
-        self.decoder = ConfigBase(decoder)
+        self.encoder = ConfigBase(encoder, batch_normalization)
+        self.encoder_MLP = ConfigBase(encoder_mlp, batch_normalization)
+        self.latent = ConfigBase(latent, batch_normalization)
+        self.decoder_MLP = ConfigBase(decoder_mlp, batch_normalization)
+        self.decoder = ConfigBase(decoder, batch_normalization)
 
         self.latent_dim = latent_dim

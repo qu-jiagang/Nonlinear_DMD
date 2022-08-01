@@ -13,13 +13,23 @@ class MaxPoolCNN(nn.Module):
         CNN_Layers = nn.ModuleList()
         for i in range(len(args.structure) - 1):
             if i<len(args.structure) - 2:
-                CNN_Layers.append(
-                    nn.Sequential(
-                        nn.Conv2d(args.structure[i],args.structure[i+1],3,padding=1),
-                        nn.ReLU(),
-                        nn.MaxPool2d(2),
+                if args.batch_normalization:
+                    CNN_Layers.append(
+                        nn.Sequential(
+                            nn.Conv2d(args.structure[i],args.structure[i+1],3,padding=1),
+                            nn.BatchNorm2d(args.structure[i+1]),
+                            nn.ReLU(),
+                            nn.MaxPool2d(2),
+                        )
                     )
-                )
+                else:
+                    CNN_Layers.append(
+                        nn.Sequential(
+                            nn.Conv2d(args.structure[i],args.structure[i+1],3,padding=1),
+                            nn.ReLU(),
+                            nn.MaxPool2d(2),
+                        )
+                    )
             else:
                 CNN_Layers.append(
                     nn.Sequential(
@@ -46,13 +56,23 @@ class UpsampleCNN(nn.Module):
         CNN_Layers = nn.ModuleList()
         for i in range(len(args.structure) - 1):
             if i<len(args.structure) - 2:
-                CNN_Layers.append(
-                    nn.Sequential(
-                        nn.Upsample(scale_factor=2),
-                        nn.Conv2d(args.structure[i],args.structure[i+1],3,padding=1),
-                        nn.ReLU(),
+                if args.batch_normalization:
+                    CNN_Layers.append(
+                        nn.Sequential(
+                            nn.Upsample(scale_factor=2),
+                            nn.Conv2d(args.structure[i],args.structure[i+1],3,padding=1),
+                            nn.BatchNorm2d(args.structure[i+1]),
+                            nn.ReLU(),
+                        )
                     )
-                )
+                else:
+                    CNN_Layers.append(
+                        nn.Sequential(
+                            nn.Upsample(scale_factor=2),
+                            nn.Conv2d(args.structure[i],args.structure[i+1],3,padding=1),
+                            nn.ReLU(),
+                        )
+                    )
             else:
                 CNN_Layers.append(
                     nn.Sequential(

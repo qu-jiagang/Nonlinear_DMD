@@ -13,12 +13,21 @@ class BaseMLP(nn.Module):
         MLP_Layers = nn.ModuleList()
         for i in range(len(args.structure) - 1):
             if i < len(args.structure) - 2:
-                MLP_Layers.append(
-                    nn.Sequential(
-                        nn.Linear(args.structure[i], args.structure[i + 1]),
-                        nn.ReLU()
+                if args.batch_normalization:
+                    MLP_Layers.append(
+                        nn.Sequential(
+                            nn.Linear(args.structure[i], args.structure[i + 1]),
+                            nn.BatchNorm2d(args.structure[i + 1]),
+                            nn.ReLU()
+                        )
                     )
-                )
+                else:
+                    MLP_Layers.append(
+                        nn.Sequential(
+                            nn.Linear(args.structure[i], args.structure[i + 1]),
+                            nn.ReLU()
+                        )
+                    )
             else:
                 MLP_Layers.append(
                     nn.Sequential(
