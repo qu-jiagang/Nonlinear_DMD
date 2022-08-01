@@ -30,7 +30,8 @@ class MaxPoolCNN(nn.Module):
         self.CNN_layers = CNN_Layers
 
     def forward(self, x):
-        x = self.CNN_layers(x)
+        for layer in self.CNN_layers:
+            x = layer(x)
         return x
 
 

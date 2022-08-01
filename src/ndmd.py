@@ -68,3 +68,24 @@ class NDMD(nn.Module):
         reconst_loss = loss1 + loss2
         represent_loss = loss3
         return sum_loss, reconst_loss, represent_loss
+
+    def decomposition(self, x):
+        channels = x.size(0)
+        out = self.encoder(x)
+        z1 = self.encoder_mlp(out.reshape([channels, -1]))
+
+        tempz = []
+        for i in range(self.latent_dim):
+            tempz.append(self.decoder_mlps[i](z1[:,i:i+1]))
+        tempx = []
+        for i in range(self.latent_dim):
+            temp = tempz[i].reshape([channels, -1, self.args.datasize_pooled[0], self.args.datasize_pooled[1]])
+            tempx.append(self.decoder(temp))
+        x_reconst = torch.zeros_like(x)
+        for i in range(self.latent_dim):
+            x_reconst += tempx[i]
+
+        decomposed_fields = tempx
+        coefs = z1
+
+        return decomposed_fields, coefs
