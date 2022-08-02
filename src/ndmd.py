@@ -19,14 +19,20 @@ class NDMD(nn.Module):
         '''
         self.args = args
         self.latent_dim = args.latent_dim
+        self.independent_decoder = args.independent_decoder
 
-        self.encoder = MaxPoolCNN(args.encoder)
+        self.encoder = MaxPoolCNN(args.encoder, args.resnet)
         self.encoder_mlp = BaseMLP(args.encoder_MLP)
         self.latent = BaseMLP(args.latent)
         self.decoder_mlps = nn.ModuleList()
         for i in range(self.latent_dim):
             self.decoder_mlps.append(BaseMLP(args.decoder_MLP))
-        self.decoder = UpsampleCNN(args.decoder)
+        if args.independent_decoder:
+            self.decoder = nn.ModuleList()
+            for i in range(self.latent_dim):
+                self.decoder.append(UpsampleCNN(args.decoder, args.resnet))
+        else:
+            self.decoder = UpsampleCNN(args.decoder, args.resnet)
 
     def forward(self, x, x_shift):
         channels = x.size(0)
@@ -39,7 +45,10 @@ class NDMD(nn.Module):
         tempx = []
         for i in range(self.latent_dim):
             temp = tempz[i].reshape([channels, -1, self.args.datasize_pooled[0], self.args.datasize_pooled[1]])
-            tempx.append(self.decoder(temp))
+            if self.independent_decoder:
+                tempx.append(self.decoder[i](temp))
+            else:
+                tempx.append(self.decoder(temp))
         x_reconst = torch.zeros_like(x)
         for i in range(self.latent_dim):
             x_reconst += tempx[i]
@@ -51,7 +60,10 @@ class NDMD(nn.Module):
         tempx_shift = []
         for i in range(self.latent_dim):
             temp = tempz_shift[i].reshape([channels, -1, self.args.datasize_pooled[0], self.args.datasize_pooled[1]])
-            tempx_shift.append(self.decoder(temp))
+            if self.independent_decoder:
+                tempx.append(self.decoder[i](temp))
+            else:
+                tempx.append(self.decoder(temp))
         x_reconst_shift = torch.zeros_like(x)
         for i in range(self.latent_dim):
             x_reconst_shift += tempx_shift[i]
@@ -80,7 +92,10 @@ class NDMD(nn.Module):
         tempx = []
         for i in range(self.latent_dim):
             temp = tempz[i].reshape([channels, -1, self.args.datasize_pooled[0], self.args.datasize_pooled[1]])
-            tempx.append(self.decoder(temp))
+            if self.independent_decoder:
+                tempx.append(self.decoder[i](temp))
+            else:
+                tempx.append(self.decoder(temp))
         x_reconst = torch.zeros_like(x)
         for i in range(self.latent_dim):
             x_reconst += tempx[i]

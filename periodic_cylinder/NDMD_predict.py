@@ -4,6 +4,7 @@ from src.config import *
 
 
 model = torch.load('NDMD_small.net')
+model.eval()
 
 Nx, Ny = 192, 384
 Nt = 1000

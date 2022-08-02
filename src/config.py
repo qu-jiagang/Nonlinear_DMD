@@ -70,7 +70,9 @@ class ConfigNDMD:
                  latent: list = None,
                  decoder: list = None,
                  decoder_mlp: list = None,
-                 batch_normalization=False):
+                 batch_normalization=False,
+                 resnet=False,
+                 independent_decoder=False,):
         if encoder is None:
             encoder = [1, 64, 128, 256, 512, 512, 512]
         if decoder is None:
@@ -99,3 +101,6 @@ class ConfigNDMD:
         self.decoder = ConfigBase(decoder, batch_normalization)
 
         self.latent_dim = latent_dim
+        self.resnet = resnet
+        self.independent_decoder = independent_decoder
+

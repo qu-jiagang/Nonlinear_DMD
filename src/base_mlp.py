@@ -17,7 +17,7 @@ class BaseMLP(nn.Module):
                     MLP_Layers.append(
                         nn.Sequential(
                             nn.Linear(args.structure[i], args.structure[i + 1]),
-                            nn.BatchNorm2d(args.structure[i + 1]),
+                            nn.BatchNorm1d(args.structure[i + 1]),
                             nn.ReLU()
                         )
                     )
