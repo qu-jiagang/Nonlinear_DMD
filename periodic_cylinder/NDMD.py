@@ -16,10 +16,11 @@ args = ConfigNDMD(
     encoder=[1, 8, 16, 32, 64, 64, 64],
     encoder_mlp=[2048],
     latent=[2048],
-    decoder=[512, 512, 512, 256, 128, 64, 1],
+    decoder=[64, 64, 64, 32, 16, 8, 1],
     decoder_mlp=[2048],
     batch_normalization=True,
-    activation='GELU'
+    independent_decoder=True,
+    activation='ReLU'
 )
 
 # construct Net
@@ -39,7 +40,7 @@ data_x_shift = torch.from_numpy(data_x_shift).float()
 database = TensorDataset(data_x, data_x_shift)
 train_loader = DataLoader(
     dataset=database,
-    batch_size=10,
+    batch_size=20,
     shuffle=True,
     drop_last=True
 )
@@ -72,7 +73,10 @@ while epoch < 2000:
 
     if epoch % 1 == 0:
         print(epoch, _loss, _loss1, _loss2)
+        loss_txt = open('loss_BatchNormal_Independent_ReLU_small.txt', mode='a+')
+        loss_txt.write(str(epoch)+'    '+str(_loss)+'    '+str(_loss1)+'    '+str(_loss2)+'\n')
+        loss_txt.close()
 
     if _loss < loss_base:
         loss_base = _loss
-        torch.save(net, 'NDMD.net')
+        torch.save(net, 'net_BatchNormal_Independent_ReLU_small.net')
