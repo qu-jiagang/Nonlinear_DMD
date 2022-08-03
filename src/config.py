@@ -72,7 +72,8 @@ class ConfigNDMD:
                  decoder_mlp: list = None,
                  batch_normalization=False,
                  resnet=False,
-                 independent_decoder=False,):
+                 independent_decoder=False,
+                 activation='ReLU',):
         if encoder is None:
             encoder = [1, 64, 128, 256, 512, 512, 512]
         if decoder is None:
@@ -103,4 +104,5 @@ class ConfigNDMD:
         self.latent_dim = latent_dim
         self.resnet = resnet
         self.independent_decoder = independent_decoder
+        self.activation = activation
 

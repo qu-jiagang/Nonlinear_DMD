@@ -20,6 +20,10 @@ class NDMD(nn.Module):
         self.args = args
         self.latent_dim = args.latent_dim
         self.independent_decoder = args.independent_decoder
+        if args.activation == 'ReLU':
+            self.activation = nn.ReLU()
+        elif args.activation == 'GELU':
+            self.activation = nn.GELU()
 
         self.encoder = MaxPoolCNN(args.encoder, args.resnet)
         self.encoder_mlp = BaseMLP(args.encoder_MLP)
@@ -41,7 +45,7 @@ class NDMD(nn.Module):
 
         tempz = []
         for i in range(self.latent_dim):
-            tempz.append(self.decoder_mlps[i](z1[:,i:i+1]))
+            tempz.append(self.decoder_mlps[i](z1[:, i:i + 1]))
         tempx = []
         for i in range(self.latent_dim):
             temp = tempz[i].reshape([channels, -1, self.args.datasize_pooled[0], self.args.datasize_pooled[1]])
@@ -56,19 +60,19 @@ class NDMD(nn.Module):
         z2 = self.latent(z1)
         tempz_shift = []
         for i in range(self.latent_dim):
-            tempz_shift.append(self.decoder_mlps[i](z2[:,i:i+1]))
+            tempz_shift.append(self.decoder_mlps[i](z2[:, i:i + 1]))
         tempx_shift = []
         for i in range(self.latent_dim):
             temp = tempz_shift[i].reshape([channels, -1, self.args.datasize_pooled[0], self.args.datasize_pooled[1]])
             if self.independent_decoder:
-                tempx.append(self.decoder[i](temp))
+                tempx_shift.append(self.decoder[i](temp))
             else:
-                tempx.append(self.decoder(temp))
+                tempx_shift.append(self.decoder(temp))
         x_reconst_shift = torch.zeros_like(x)
         for i in range(self.latent_dim):
             x_reconst_shift += tempx_shift[i]
 
-        z2_from_shift = self.encoder_mlp(self.encoder(x_shift).reshape([channels,-1]))
+        z2_from_shift = self.encoder_mlp(self.encoder(x_shift).reshape([channels, -1]))
 
         return x_reconst, x_reconst_shift, z2, z2_from_shift
 
@@ -88,7 +92,7 @@ class NDMD(nn.Module):
 
         tempz = []
         for i in range(self.latent_dim):
-            tempz.append(self.decoder_mlps[i](z1[:,i:i+1]))
+            tempz.append(self.decoder_mlps[i](z1[:, i:i + 1]))
         tempx = []
         for i in range(self.latent_dim):
             temp = tempz[i].reshape([channels, -1, self.args.datasize_pooled[0], self.args.datasize_pooled[1]])

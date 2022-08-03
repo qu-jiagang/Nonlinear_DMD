@@ -78,11 +78,11 @@ class UpsampleCNN(nn.Module):
                 if args.batch_normalization:
                     CNN_Layers.append(
                         nn.Sequential(
-                            # nn.Upsample(scale_factor=2),
+                            nn.Upsample(scale_factor=2),
+                            _Conv2Block(args.structure[i], args.structure[i + 1], resnet),
                             # nn.Conv2d(args.structure[i],args.structure[i+1],3,padding=1),
                             # nn.BatchNorm2d(args.structure[i+1]),
-                            _Conv2Block(args.structure[i], args.structure[i + 1], resnet),
-                            nn.ReLU(),
+                            # nn.ReLU(),
                         )
                     )
                 else:

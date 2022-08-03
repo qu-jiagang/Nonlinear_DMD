@@ -18,7 +18,8 @@ args = ConfigNDMD(
     latent=[2048],
     decoder=[512, 512, 512, 256, 128, 64, 1],
     decoder_mlp=[2048],
-    batch_normalization=True
+    batch_normalization=True,
+    activation='GELU'
 )
 
 # construct Net
