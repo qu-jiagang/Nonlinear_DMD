@@ -9,6 +9,11 @@ class BaseMLP(nn.Module):
         self.input_dim = args.input_dim
         self.output_dim = args.output_dim
 
+        if args.activation == 'GELU':
+            self.activation = nn.GELU()
+        elif args.activation == 'ReLU':
+            self.activation = nn.ReLU()
+
         # CNN_layers: [1-128-128-128-1]
         MLP_Layers = nn.ModuleList()
         for i in range(len(args.structure) - 1):
@@ -18,14 +23,14 @@ class BaseMLP(nn.Module):
                         nn.Sequential(
                             nn.Linear(args.structure[i], args.structure[i + 1]),
                             nn.BatchNorm1d(args.structure[i + 1]),
-                            nn.ReLU()
+                            self.activation
                         )
                     )
                 else:
                     MLP_Layers.append(
                         nn.Sequential(
                             nn.Linear(args.structure[i], args.structure[i + 1]),
-                            nn.ReLU()
+                            self.activation
                         )
                     )
             else:
@@ -40,4 +45,3 @@ class BaseMLP(nn.Module):
         for layer in self.MLP_Layers:
             x = layer(x)
         return x
-

@@ -1,6 +1,5 @@
 import torch
 import torch.nn as nn
-import numpy as np
 from src.ndmd import NDMD
 from src.config import *
 import torch.optim as optim
@@ -13,19 +12,20 @@ Nx, Ny = 192, 384
 args = ConfigNDMD(
     input_datasize=[Nx, Ny],
     latent_dim=2,
-    encoder=[1, 8, 16, 32, 64, 64, 64],
-    encoder_mlp=[2048],
-    latent=[2048],
-    decoder=[64, 64, 64, 32, 16, 8, 1],
-    decoder_mlp=[2048],
-    batch_normalization=True,
+    encoder=[1, 64, 128, 256, 512, 512, 512],
+    encoder_mlp=[1000, 4096],
+    latent=[1024],
+    decoder=[512, 512, 512, 256, 128, 64, 1],
+    decoder_mlp=[4096, 1000],
+    batch_normalization=False,
     independent_decoder=True,
-    activation='ReLU'
+    activation='GELU'
 )
 
 # construct Net
 net = NDMD(args).cuda()
-input_data = optimizer = optim.Adam(net.parameters(), lr=0.0005)
+optimizer = optim.SGD(net.parameters(), lr=0.5, momentum=0.5)
+scheduler = optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.998)
 
 # dataset
 data = np.fromfile('../dataset/periodic.dat').reshape([1000, 1, Nx, Ny])
@@ -67,16 +67,18 @@ while epoch < 2000:
         _loss1 += loss1.cpu().detach().numpy()
         _loss2 += loss2.cpu().detach().numpy()
 
+    scheduler.step()
+
     _loss /= i + 1
     _loss1 /= i + 1
     _loss2 /= i + 1
 
     if epoch % 1 == 0:
         print(epoch, _loss, _loss1, _loss2)
-        loss_txt = open('loss_BatchNormal_Independent_ReLU_small.txt', mode='a+')
+        loss_txt = open('loss.txt', mode='a+')
         loss_txt.write(str(epoch)+'    '+str(_loss)+'    '+str(_loss1)+'    '+str(_loss2)+'\n')
         loss_txt.close()
 
     if _loss < loss_base:
         loss_base = _loss
-        torch.save(net, 'net_BatchNormal_Independent_ReLU_small.net')
+        torch.save(net, 'NDMD-AE.net')

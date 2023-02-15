@@ -6,12 +6,12 @@ import matplotlib.pyplot as plt
 Nx, Ny = 192,384
 periodic = np.fromfile('../dataset/periodic.dat').reshape([1000, Nx, Ny])
 
-modes, coefs = snapshot_dmd(periodic[:-1],periodic[1:], rank=5, dask=True)
+modes, coeffs = snapshot_dmd(periodic[:-1],periodic[1:], rank=5, dask=True)
 modes_real = np.real(modes)
 modes_imag = np.imag(modes)
 
-coefs_real = np.real(coefs)
-coefs_imag = np.imag(coefs)
+coefs_real = np.real(coeffs)
+coefs_imag = np.imag(coeffs)
 
 plt.figure()
 for i in range(5):

@@ -8,6 +8,12 @@ class BaseCNN(nn.Module):
 
         self.input_dim = args.input_dim
         self.output_dim = args.output_dim
+        self.activation = args.activation
+
+        if args.activation == 'GELU':
+            self.activation = nn.GELU()
+        elif args.activation == 'ReLU':
+            self.activation = nn.ReLU()
 
         # CNN_layers: [1-128-128-128-1]
         CNN_Layers = nn.ModuleList()
@@ -16,7 +22,7 @@ class BaseCNN(nn.Module):
                 CNN_Layers.append(
                     nn.Sequential(
                         nn.Conv2d(args.structure[i],args.structure[i+1],3,padding=1),
-                        nn.ReLU()
+                        self.activation
                     )
                 )
             else:

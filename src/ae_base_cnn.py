@@ -12,7 +12,7 @@ class _Conv2Block(nn.Module):
             self.conv_block = nn.Sequential(
                 nn.Conv2d(in_channel, out_channel, 3, 1, 1),
                 nn.BatchNorm2d(out_channel),
-                nn.ReLU()
+                nn.GELU()
             )
 
     def forward(self, x):
@@ -26,6 +26,12 @@ class MaxPoolCNN(nn.Module):
 
         self.input_dim = args.input_dim
         self.output_dim = args.output_dim
+        self.activation = args.activation
+
+        if args.activation == 'GELU':
+            self.activation = nn.GELU()
+        elif args.activation == 'ReLU':
+            self.activation = nn.ReLU()
 
         # CNN_layers: [1-128-128-128-1]
         cnn_layers = nn.ModuleList()
@@ -34,10 +40,10 @@ class MaxPoolCNN(nn.Module):
                 if args.batch_normalization:
                     cnn_layers.append(
                         nn.Sequential(
-                            # nn.Conv2d(args.structure[i],args.structure[i+1],3,padding=1),
-                            # nn.BatchNorm2d(args.structure[i+1]),
-                            # nn.ReLU(),
-                            _Conv2Block(args.structure[i], args.structure[i + 1], resnet),
+                            nn.Conv2d(args.structure[i],args.structure[i+1],3,padding=1),
+                            nn.BatchNorm2d(args.structure[i+1]),
+                            self.activation,
+                            # _Conv2Block(args.structure[i], args.structure[i + 1], resnet),
                             nn.MaxPool2d(2),
                         )
                     )
@@ -45,7 +51,7 @@ class MaxPoolCNN(nn.Module):
                     cnn_layers.append(
                         nn.Sequential(
                             nn.Conv2d(args.structure[i], args.structure[i + 1], 3, padding=1),
-                            nn.ReLU(),
+                            self.activation,
                             nn.MaxPool2d(2),
                         )
                     )
@@ -70,6 +76,12 @@ class UpsampleCNN(nn.Module):
 
         self.input_dim = args.input_dim
         self.output_dim = args.output_dim
+        self.activation = args.activation
+
+        if args.activation == 'GELU':
+            self.activation = nn.GELU()
+        elif args.activation == 'ReLU':
+            self.activation = nn.ReLU()
 
         # CNN_layers: [1-128-128-128-1]
         CNN_Layers = nn.ModuleList()
@@ -79,10 +91,10 @@ class UpsampleCNN(nn.Module):
                     CNN_Layers.append(
                         nn.Sequential(
                             nn.Upsample(scale_factor=2),
-                            _Conv2Block(args.structure[i], args.structure[i + 1], resnet),
-                            # nn.Conv2d(args.structure[i],args.structure[i+1],3,padding=1),
-                            # nn.BatchNorm2d(args.structure[i+1]),
-                            # nn.ReLU(),
+                            # _Conv2Block(args.structure[i], args.structure[i + 1], resnet),
+                            nn.Conv2d(args.structure[i],args.structure[i+1],3,padding=1),
+                            nn.BatchNorm2d(args.structure[i+1]),
+                            self.activation
                         )
                     )
                 else:
@@ -90,7 +102,7 @@ class UpsampleCNN(nn.Module):
                         nn.Sequential(
                             nn.Upsample(scale_factor=2),
                             nn.Conv2d(args.structure[i], args.structure[i + 1], 3, padding=1),
-                            nn.ReLU(),
+                            self.activation
                         )
                     )
             else:

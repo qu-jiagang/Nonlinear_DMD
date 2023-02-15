@@ -6,13 +6,14 @@ class ConfigBase:
     # structure: list
     # e.g. config_base([1,128,1])
     # refer to a multi-layer neural network: 1->128->1
-    def __init__(self, structure: list = None, batch_normalization=False):
+    def __init__(self, structure: list = None, batch_normalization=False, activation='GELU'):
         if structure is None:
             structure = [1, 128, 128, 128, 1]
         self.structure = structure
         self.input_dim = structure[0]
         self.output_dim = structure[-1]
         self.batch_normalization = batch_normalization
+        self.activation = activation
 
 
 class ConfigBaseAE:

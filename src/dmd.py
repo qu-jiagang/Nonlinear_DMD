@@ -11,8 +11,7 @@ def snapshot_dmd(snapshots, snapshots_prime, rank=None, dask=False):
     try:
         t,m,n = snapshots.shape
     except:
-        print('Error: wrong shape of the input snapshots')
-        return 0
+        raise EOFError('Error: wrong shape of the input snapshots')
 
     X = snapshots.reshape([t, m * n]).T
     Y = snapshots_prime.reshape([t, m * n]).T
